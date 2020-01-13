@@ -1,4 +1,4 @@
-from config.urls import path
+from django.urls import path
 from members.views import login_view
 
 app_name = "members"
