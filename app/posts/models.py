@@ -8,6 +8,11 @@ class Post(models.Model):
     like_users = models.ManyToManyField(User, through='PostLike', related_name='like_posts_set')
     created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return '{author} | {created}'.format(
+            author = self.author.username,
+            created = self.created,
+        )
 
 class PostImage(models.Model):
     post = models.ForeignKey(User, on_delete=models.CASCADE)
