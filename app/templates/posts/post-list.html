@@ -1,9 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Post List</h1>
-    {% for post in posts %}
-        <div>{{ post.author }}</div>
-        <div>{{ post.created }}</div>
-    {% endfor %}
-{% endblock %} 
+<h1>Post List</h1>
+
+{% for post in posts %}
+<div>작성자: {{ post.author }}</div>
+<div>작성일시: {{ post.created }}</div>
+<div>글내용: {{ post.content }}</div>
+<form action="{% url 'posts:post-like' pk=post.pk %}" method="POST">
+    {% csrf_token %}
+    {% if post in user.like_post_set.all %}
+
+        <button class="btn btn-primary" type="submit">좋아요 취소</button>
+    {% else %}
+        <button class="btn btn-outline-primary" type="submit">좋아요</button>
+    {% endif %}
+</form>
+<hr>
+{% endfor %}
+
+{% endblock %}

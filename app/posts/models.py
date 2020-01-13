@@ -5,7 +5,7 @@ from members.models import User
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(blank=True)
-    like_users = models.ManyToManyField(User, through='PostLike', related_name='like_posts_set')
+    like_users = models.ManyToManyField(User, through='PostLike', related_name='like_post_set')
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -27,5 +27,5 @@ class PostComment(models.Model):
 
 class PostLike(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
